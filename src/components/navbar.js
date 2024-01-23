@@ -31,6 +31,13 @@ function Navbar() {
       >
         Manual Journal
       </NavLink>
+
+      <NavLink
+        to="/chartofAccounts"
+        className={({ isActive }) => "nav-item" + (isActive ? " active" : "")}
+      >
+      Chart of Accounts
+      </NavLink>
       {/* Add more nav items as needed */}
     </nav>
   );

@@ -7,7 +7,7 @@ import Navbar from './components/navbar';
 import Invoices from './pages/invoices';
 import ManualJournal from './pages/manualjournal';
 import Invoice from './pages/Invoice';
-
+import ChartofAccounts from './components/chartofAccounts';
 import Report from './pages/reports';
 
 
@@ -21,6 +21,7 @@ function App() {
         <Route path="/invoices" element={<Invoice />} />
         <Route path="/manualjournal" element={<ManualJournal />} />
         <Route path="/reports" element={<Report />} />
+        <Route path='/chartofAccounts' element={<ChartofAccounts/>} />
 
       </Routes>
     </Router>

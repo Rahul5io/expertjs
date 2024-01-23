@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import { accountsData } from '../storage/chartAccountsData';
+import Select from 'react-select';
 
 export default function Invoice() {
   // State for invoice data
@@ -41,6 +42,12 @@ export default function Invoice() {
     // Logging here might not reflect the update immediately
     console.log("Added new line item");
   };
+
+   // Inside your component
+   const codeSelection = accountsData.map(account => ({
+    value: account.code,
+    label: `${account.code}-${account.name}`
+}));
 
   // Initialize default dates
   useEffect(() => {
@@ -172,11 +179,17 @@ export default function Invoice() {
                           />
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <input className="border-gray-300 rounded-lg p-2"
-                            type="text"
-                            name="account"
-
-                          />
+                        <Select
+                                        options={codeSelection}
+                                        className="border-gray-300 rounded-lg p-2"
+                                        name="accountingCode"
+                                        placeholder="Select Account"
+                                        styles={{
+                                          menu: base => ({
+                                            zIndex: 100
+                                          })
+                                        }}
+                                    />
                         </td>
 
                         <td className="px-6 py-4 whitespace-nowrap">
