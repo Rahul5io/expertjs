@@ -9,6 +9,7 @@ import ManualJournal from './pages/manualjournal';
 import Invoice from './pages/Invoice';
 import ChartofAccounts from './components/chartofAccounts';
 import Report from './pages/reports';
+import ChatAi from './pages/chatai';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/manualjournal" element={<ManualJournal />} />
         <Route path="/reports" element={<Report />} />
         <Route path='/chartofAccounts' element={<ChartofAccounts/>} />
+        <Route path='/chatAI' element={<ChatAi/>} />
 
       </Routes>
     </Router>

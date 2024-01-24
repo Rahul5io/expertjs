@@ -38,6 +38,13 @@ function Navbar() {
       >
       Chart of Accounts
       </NavLink>
+
+      <NavLink
+        to="/chatAI"
+        className={({ isActive }) => "nav-item" + (isActive ? " active" : "")}
+      >
+      Chat AI
+      </NavLink>
       {/* Add more nav items as needed */}
     </nav>
   );

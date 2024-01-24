@@ -1,31 +1,45 @@
-/* src/styles/Navbar.css */
 .navbar {
-    background-color: #0077C5; /* Xero's blue */
-    color: white;
-    display: flex;
-    justify-content: start;
-    padding: 0 20px;
-    align-items: center;
-    height: 60px; /* Adjust the height as needed */
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2); /* Adding some shadow for depth */
+  background-color: #0077C5;
+  color: white;
+  display: flex;
+  justify-content: start;
+  padding: 0 20px;
+  align-items: center;
+  height: 60px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav-item {
+  margin-right: 30px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.nav-item:hover {
+  background-color: #005A9C;
+}
+
+.nav-item.active {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #005A9C;
+}
+
+/* Media query rules for mobile devices */
+@media (max-width: 768px) {
+  /* Stack the navigation items vertically */
+  .navbar {
+    flex-direction: column;
+    height: auto;
   }
-  
+
+  /* Change the layout of the nav items */
   .nav-item {
-    margin-right: 30px; /* Spacing between nav items */
-    text-decoration: none;
-    color: white;
-    font-size: 16px; /* Adjust font size as needed */
-    padding: 10px 15px;
-    border-radius: 4px; /* Rounded corners for the buttons */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    margin-right: 0;
+    margin-bottom: 15px;
   }
-  
-  .nav-item:hover {
-    background-color: #005A9C; /* A darker shade of blue for hover effect */
-  }
-  
-  .nav-item.active {
-    font-weight: bold; /* Make the active link bold */
-    color: #ffffff; /* Change the color for active link */
-    background-color: #005A9C; /* Add a background color for active link */
-  }
+}
