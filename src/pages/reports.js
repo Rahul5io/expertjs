@@ -1,24 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/reports.css';
 
 function Reports() {
-  const reportTypes = [
-    { name: 'Balance Sheet' },
-    { name: 'Profit & Loss' },
-    { name: 'Trial Balance' },
-    { name: 'Aged Creditors' },
-    { name: 'Aged Debtors' },
-  ];
-
   return (
     <div className="reports-container">
       <h1>Reports</h1>
       <div className="reports-grid">
-        {reportTypes.map((report, index) => (
-          <div key={index} className="report-card">
-            <h3>{report.name}</h3>
-          </div>
-        ))}
+        {/* Add a Link to navigate to TrialBalance */}
+        <Link to="/trialBalance">
+          <button className="trial-balance-button">Trial Balance</button>
+        </Link>
+
+
+        <Link to="/profitloss">
+          <button className="trial-balance-button">Profit & loss</button>
+        </Link>
+        {/* Add other report components or content here */}
       </div>
     </div>
   );

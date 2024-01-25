@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { accountsData } from '../storage/chartAccountsData';
 import Select from 'react-select';
 
+
+
 export default function Invoice() {
   // State for invoice data
   const lineItems =    { description: '', qty: 1, unitPrice: 0, accountingCode: 'sales', amount: 0 };
@@ -181,7 +183,7 @@ export default function Invoice() {
                         <td className="px-6 py-4 whitespace-nowrap">
                         <Select
                                         options={codeSelection}
-                                        className="border-gray-300 rounded-lg p-2"
+                                        className="border-gray-300 rounded-lg "
                                         name="accountingCode"
                                         placeholder="Select Account"
                                         styles={{

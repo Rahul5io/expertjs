@@ -1,0 +1,26 @@
+/* Add this CSS to your styles or update existing styles */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #e2e8f0;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f3f4f6;
+  }
+  
+  .table tbody tr:last-child {
+    border-top: 1px solid #e2e8f0;
+  }
+  
+  .table tbody tr:last-child td {
+    border-top: 2px solid #e2e8f0;
+  }
+  

@@ -4,7 +4,7 @@ import { accountsData } from '../storage/chartAccountsData';
 
 export default function ManualJournal() {
 
-    const journalItems = { description: '', accounting_Code: 'sales', tax_Rate: 0, debit: 0, credit: 0 };
+    const journalItems = { description: '', accounting_Code: 1200, tax_Rate: 0, debit: 0, credit: 0 };
 
     const [journalData, setJournalData] = useState({
         jornal_date: '',
@@ -12,13 +12,13 @@ export default function ManualJournal() {
         contact: '',
         jornalNo: '',
         narration: '',
-        items: [journalItems,],
+        items: [journalItems, journalItems],
         subTotal: 0,
         taxTotal: 0,
         total: 0,
     });
 
-    
+
 
     useEffect(() => {
 
@@ -44,6 +44,54 @@ export default function ManualJournal() {
         value: account.code,
         label: `${account.code}-${account.name}`
     }));
+
+    // Add a new item row to the invoice
+    const handleAddItem = () => {
+        setJournalData(prevData => {
+            const updatedItems = [...prevData.items, { ...journalItems }];
+            return {
+                ...prevData,
+                items: updatedItems,
+            };
+        });
+
+        // Logging here might not reflect the update immediately
+        console.log("Added new line item");
+    };
+
+
+    //set new data from input to their variables
+    const handleInputChange = (index, fieldName, value) => {
+        const newItems = [...journalData.items];
+    
+        // If the index is out of bounds, it means we're dealing with a new item
+        if (index >= newItems.length) {
+          newItems.push({ description: '', accounting_Code: '', tax_Rate: 0, debit: 0, credit: 0 });
+        }
+    
+        newItems[index] = { ...newItems[index], [fieldName]: value };
+    
+        // Update the state
+        setJournalData((prevData) => ({
+          ...prevData,
+          items: newItems,
+          subTotal: calculateTotal(newItems, 'debit'),
+          total: calculateTotal(newItems, 'credit'),
+        }));
+      };
+    
+
+    const calculateTotal = (items, name) => {
+        if (name==="debit") {
+            return items.reduce((total, item) => total + parseFloat(item.debit || 0), 0);
+        } else{
+            return items.reduce((total, item) => total + parseFloat(item.credit || 0), 0);
+        }
+    };
+
+    useEffect(() => {
+        console.log("journal data changed", journalData)
+    }, [journalData])
 
     return (
         <div className="max-w-6xl mx-auto my-8 p-4 bg-white shadow rounded">
@@ -92,71 +140,80 @@ export default function ManualJournal() {
                 </select>
             </div>
             <div className="overflow-x-auto">
-            <table className="min-w-full table-fixed divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                    <tr>
-                        {journalData.items.length > 0 && Object.keys(journalData.items[0]).map((key, index) => (
-                            <th key={index} className="  w-1/4">
-                                {toTitleCase(key)}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody className="bg-white  table-fixed divide-y divide-gray-200">
-                    {journalData.items.map((item, index) => (
-                        <tr key={index}>
-                            <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                                <input className="border-gray-300 rounded-lg p-2 "
-                                    type="text"
-                                    name="description"
+                <table className="min-w-full table-fixed divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                        <tr>
+                            {journalData.items.length > 0 && Object.keys(journalData.items[0]).map((key, index) => (
+                                <th key={index} className="  w-1/4">
+                                    {toTitleCase(key)}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody className="bg-white  table-fixed divide-y divide-gray-200">
+                        {journalData.items.map((item, index) => (
+                            <tr key={index}>
+                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
+                                    <input className="border-gray-300 rounded-lg p-2 "
+                                        type="text"
+                                        name="description"
+                                        onChange={(e) => handleInputChange(index, "description", e.target.value)}
+                                    />
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
 
-                                />
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                            
                                     <Select
                                         options={codeSelection}
-                                        className="border-gray-300 rounded-lg p-2"
+                                        className="border-gray-300 rounded-lg "
                                         name="accountingCode"
                                         placeholder="Select Account"
+                                        onChange={(selectedOption) => handleInputChange(index, "accounting_Code", selectedOption.value)}
                                     />
-                                
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                                <input className="border-gray-300 rounded-lg p-2"
-                                    type="number"
-                                    name="unitPrice"
 
-                                />
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                                <input className="border-gray-300 rounded-lg p-2"
-                                    type="text"
-                                    name="account"
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
+                                    <input className="border-gray-300 rounded-lg p-2"
+                                        type="number"
+                                        name="taxRate"
+                                        value={item.tax_Rate}
+                                        onChange={(e) => handleInputChange(index, "tax_Rate", e.target.value)}
 
-                                />
-                            </td>
+                                    />
+                                </td>
+                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
+                                    <input className="border-gray-300 rounded-lg p-2"
+                                        type="text"
+                                        name="debit"
+                                        value={item.debit}
 
-                            <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                                <input className="border-gray-300 rounded-lg p-2"
-                                    type="number"
-                                    name="annount"
+                                        onChange={(e) => handleInputChange(index, "debit", e.target.value)}
 
-                                />
-                            </td>
+                                    />
+                                </td>
 
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
+                                    <input className="border-gray-300 rounded-lg p-2"
+                                        type="number"
+                                        name="credit"
+                                        value={item.credit}
+                                        onChange={(e) => handleInputChange(index, "credit", e.target.value)}
+                                    />
+                                </td>
+
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
             <div className="flex justify-between items-center mt-4">
-                <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                    Add a new line
+                <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                    onClick={handleAddItem}
+                >
+                    Add items
                 </button>
                 <div className="space-x-4">
                     <span className="font-medium">Subtotal</span>
-                    <span>0.00</span>
+                    <span>{journalData.subTotal}</span>
 
                 </div>
             </div>
@@ -171,7 +228,7 @@ export default function ManualJournal() {
             <div className="flex justify-end items-center mt-4">
                 <div className="space-x-4">
                     <span className="font-bold">Total</span>
-                    <span>0.00</span>
+                    <span>{journalData.total}</span>
 
                 </div>
             </div>

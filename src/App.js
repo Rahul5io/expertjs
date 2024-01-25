@@ -10,6 +10,8 @@ import Invoice from './pages/Invoice';
 import ChartofAccounts from './components/chartofAccounts';
 import Report from './pages/reports';
 import ChatAi from './pages/chatai';
+import TrialBalance from './reports/trialBalance';
+import ProfitLoss from './reports/profitloss';
 
 
 function App() {
@@ -24,6 +26,10 @@ function App() {
         <Route path="/reports" element={<Report />} />
         <Route path='/chartofAccounts' element={<ChartofAccounts/>} />
         <Route path='/chatAI' element={<ChatAi/>} />
+        <Route path='/trialBalance' element={<TrialBalance/>} />
+        <Route path='/profitloss' element={<ProfitLoss/>} />
+
+        
 
       </Routes>
     </Router>
