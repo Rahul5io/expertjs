@@ -16,6 +16,10 @@ function Reports() {
         <Link to="/profitloss">
           <button className="trial-balance-button">Profit & loss</button>
         </Link>
+
+        <Link to="/balanceSheet">
+          <button className="trial-balance-button">Balance Sheet</button>
+        </Link>
         {/* Add other report components or content here */}
       </div>
     </div>

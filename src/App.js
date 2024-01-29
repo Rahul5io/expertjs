@@ -12,6 +12,8 @@ import Report from './pages/reports';
 import ChatAi from './pages/chatai';
 import TrialBalance from './reports/trialBalance';
 import ProfitLoss from './reports/profitloss';
+import BalanceSheet from './reports/balanceSheet';
+import Signin from './pages/signIn';
 
 
 function App() {
@@ -28,9 +30,9 @@ function App() {
         <Route path='/chatAI' element={<ChatAi/>} />
         <Route path='/trialBalance' element={<TrialBalance/>} />
         <Route path='/profitloss' element={<ProfitLoss/>} />
-
+        <Route path='/balanceSheet' element={<BalanceSheet/>} />
+        <Route path='/signIn' element={<Signin/>} />
         
-
       </Routes>
     </Router>
 

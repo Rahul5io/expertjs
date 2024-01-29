@@ -45,6 +45,13 @@ function Navbar() {
       >
       Chat AI
       </NavLink>
+
+      <NavLink
+        to="/signIn"
+        className={({ isActive }) => "nav-item" + (isActive ? " active" : "")}
+      >
+      Sign In
+      </NavLink>
       {/* Add more nav items as needed */}
     </nav>
   );

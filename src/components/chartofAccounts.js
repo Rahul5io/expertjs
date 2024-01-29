@@ -1,23 +1,35 @@
-import React from 'react';
-import {accountsData} from '../storage/chartAccountsData';
+import React, { useRef } from 'react';
+import { accountsData } from '../storage/chartAccountsData';
+
+import { DownloadTableExcel, useDownloadExcel } from 'react-export-table-to-excel';
 
 const ChartOfAccounts = () => {
 
+  const tableRef = useRef(null);
+
+  //TO EXPORT EXCEL
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: 'Chart of Accouts',
+    sheet: 'Users'
+  })
 
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Chart of Accounts</h1>
         <div className="flex space-x-2">
-       
+
           <button className="bg-blue-500 hover:bg-green-600 text-white px-3 py-1 rounded">Print PDF</button>
           <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">Import</button>
-          <button className="bg-orange-500 hover:bg-green-600 text-white px-3 py-1 rounded">Export</button>
+          <button className="bg-orange-500 hover:bg-green-600 text-white px-3 py-1 rounded" 
+          onClick={onDownload}
+          >Export</button>
         </div>
       </div>
       {/* ... other button groups and search input ... */}
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-slate-500">
+        <table className="table-auto w-full border-collapse border border-slate-500" ref={tableRef}>
           <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2">Code</th>

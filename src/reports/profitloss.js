@@ -1,4 +1,5 @@
 import React from "react";
+import {PlTbSearch} from '../components/ui/reportSearch';
 
 export default function ProfitLoss() {
   // Sample data as an array of objects
@@ -44,6 +45,9 @@ export default function ProfitLoss() {
       <h1 className="text-3xl font-semibold text-center">Craig's Landscaping Services</h1>
       <h2 className="text-xl text-center mt-2">PROFIT AND LOSS</h2>
       <p className="text-center mb-6">January - June, 2020</p>
+      
+      <PlTbSearch />
+
       <div className="border-t border-b border-gray-300 py-4">
         <div className="flex justify-between border-b border-gray-200">
           <span className="font-bold"></span>

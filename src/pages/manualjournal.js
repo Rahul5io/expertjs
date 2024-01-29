@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { accountsData } from '../storage/chartAccountsData';
+import EntryTable from '../components/invoiceJournal/Entrytable';
 
 export default function ManualJournal() {
 
@@ -140,83 +141,11 @@ export default function ManualJournal() {
                 </select>
             </div>
             <div className="overflow-x-auto">
-                <table className="min-w-full table-fixed divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                        <tr>
-                            {journalData.items.length > 0 && Object.keys(journalData.items[0]).map((key, index) => (
-                                <th key={index} className="  w-1/4">
-                                    {toTitleCase(key)}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody className="bg-white  table-fixed divide-y divide-gray-200">
-                        {journalData.items.map((item, index) => (
-                            <tr key={index}>
-                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                                    <input className="border-gray-300 rounded-lg p-2 "
-                                        type="text"
-                                        name="description"
-                                        onChange={(e) => handleInputChange(index, "description", e.target.value)}
-                                    />
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
 
-                                    <Select
-                                        options={codeSelection}
-                                        className="border-gray-300 rounded-lg "
-                                        name="accountingCode"
-                                        placeholder="Select Account"
-                                        onChange={(selectedOption) => handleInputChange(index, "accounting_Code", selectedOption.value)}
-                                    />
-
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                                    <input className="border-gray-300 rounded-lg p-2"
-                                        type="number"
-                                        name="taxRate"
-                                        value={item.tax_Rate}
-                                        onChange={(e) => handleInputChange(index, "tax_Rate", e.target.value)}
-
-                                    />
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                                    <input className="border-gray-300 rounded-lg p-2"
-                                        type="text"
-                                        name="debit"
-                                        value={item.debit}
-
-                                        onChange={(e) => handleInputChange(index, "debit", e.target.value)}
-
-                                    />
-                                </td>
-
-                                <td className="px-6 py-4 whitespace-nowrap w-1/4">
-                                    <input className="border-gray-300 rounded-lg p-2"
-                                        type="number"
-                                        name="credit"
-                                        value={item.credit}
-                                        onChange={(e) => handleInputChange(index, "credit", e.target.value)}
-                                    />
-                                </td>
-
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+            <EntryTable data={journalData.items} handleInputChange={handleInputChange} handleAddItem={handleAddItem} codeSelection={codeSelection} isInvoice={false} />
             </div>
-            <div className="flex justify-between items-center mt-4">
-                <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                    onClick={handleAddItem}
-                >
-                    Add items
-                </button>
-                <div className="space-x-4">
-                    <span className="font-medium">Subtotal</span>
-                    <span>{journalData.subTotal}</span>
 
-                </div>
-            </div>
+        
             <div className="flex justify-end items-center mt-4">
                 <div className="space-x-4">
                     <span className="font-bold">Tax</span>
